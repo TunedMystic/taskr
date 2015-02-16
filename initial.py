@@ -26,9 +26,9 @@ def randomDate():
   """
   This function will return a random datetime between two datetime objects.
   """
-  start = arrow.get(datetime.datetime(2014, 7, 1, 12, 0, 0))
-  end = arrow.get(datetime.datetime(2014, 12, 17, 12, 0, 0))
-  delta = end - start
+  delta = datetime.timedelta(weeks = 12)
+  start = arrow.get(datetime.datetime.now() + datetime.timedelta(weeks = -2))
+  end = arrow.get(datetime.datetime.now() + delta)
   int_delta = (delta.days * 24 * 60 * 60) + delta.seconds
   random_second = random.randrange(int_delta)
   d = start + datetime.timedelta(seconds=random_second)
@@ -63,7 +63,9 @@ def main():
   # https://github.com/joke2k/django-faker
   populator = Faker.getPopulator()
   populator.addEntity(Meeting, 20, {
-      "user": lambda x: randomUser()
+      "user": lambda x: randomUser(),
+      "date": lambda x: randomDate(),
+      "priority": lambda x: random.randrange(1, 3 + 1)
   })
   generatedModels = populator.execute()
   print "[Done] Making Fake <Meeting>s."
