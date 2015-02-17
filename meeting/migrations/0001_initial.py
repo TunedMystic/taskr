@@ -22,7 +22,8 @@ class Migration(migrations.Migration):
                 ('location', models.CharField(default=b'', max_length=100)),
                 ('priority', models.PositiveIntegerField(default=2, choices=[(3, b'Important'), (2, b'Standard'), (1, b'Casual')])),
                 ('notes', models.CharField(default=b'', max_length=180)),
-                ('user', models.ForeignKey(related_name='meetings', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('mhash', models.CharField(max_length=20)),
+                ('user', models.ForeignKey(related_name='meetings', to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },

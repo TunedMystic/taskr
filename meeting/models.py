@@ -18,7 +18,7 @@ class Meeting(models.Model):
   )
   DEFAULT_PRIORITY = PRIORITY_LEVELS[1]
   # The User that is creating the meeting.
-  user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "meetings", blank = True, null = True)
+  user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name = "meetings", blank = False)
   # 'Who': The person / company the User is scheduled to meet.
   person = models.CharField(max_length = 30, blank = False)
   company = models.CharField(max_length = 30, default = "", blank = True)
@@ -32,6 +32,8 @@ class Meeting(models.Model):
   priority = models.PositiveIntegerField(choices = PRIORITY_LEVELS, default = DEFAULT_PRIORITY[0], blank = False)
   # Additional comments or details.
   notes = models.CharField(max_length = 180, default = "", blank = False)
+  # Unique hash associated with each meeting.
+  mhash = models.CharField(max_length = 20, blank = False)
   
   def __unicode__(self):
     return "%s : %s" %(self.person[:24], self.date.strftime("%m/%d/%Y, %I:%M %p"))

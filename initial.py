@@ -54,18 +54,19 @@ def main():
   makeUser("Chewbacca", "chewbacca@gmail.com", "chewbacca101")
   makeUser("Vader", "vader@gmail.com", "vader101")
   makeUser("Obi-wan", "obiwan@gmail.com", "obiwan101")
-  Drogo = get_user_model().objects.create_superuser(username = "drogo", email = "drogo@gmail.com", password = "drogo101")
-  Anakin = get_user_model().objects.create_superuser(username = "anakin", email = "anakin@gmail.com", password = "anakin101")
+  Drogo = get_user_model().objects.create_superuser(username = "Drogo", email = "drogo@gmail.com", password = "drogo101")
+  Anakin = get_user_model().objects.create_superuser(username = "Anakin", email = "anakin@gmail.com", password = "anakin101")
   print "[Done] Making Users."
   
   print "\nMaking Fake <Meeting>s..."
   # Generate fake models.
   # https://github.com/joke2k/django-faker
   populator = Faker.getPopulator()
-  populator.addEntity(Meeting, 20, {
+  populator.addEntity(Meeting, 24, {
       "user": lambda x: randomUser(),
       "date": lambda x: randomDate(),
-      "priority": lambda x: random.randrange(1, 3 + 1)
+      "priority": lambda x: random.randrange(1, 3 + 1),
+      "mhash": lambda x: uuid.uuid4().hex[23:-1]
   })
   generatedModels = populator.execute()
   print "[Done] Making Fake <Meeting>s."

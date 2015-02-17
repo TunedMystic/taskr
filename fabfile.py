@@ -97,8 +97,9 @@ def clean():
   local("rm -rfv logs/* || true")
   local("rm -rf celerybeat-schedule || true")
 
+run_services = "s"#tart"
 @task
-def run(s = "start"):
+def run(s = run_services):
   """
   Run the Django dev server.
   """
@@ -107,7 +108,7 @@ def run(s = "start"):
   local("honcho run fab django_server")
 
 @task
-def gun(s = "start"):
+def gun(s = run_services):
   """
   Run the Gunicorn web server.
   """
