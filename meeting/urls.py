@@ -7,5 +7,4 @@ urlpatterns = patterns('',
   url(r"^api/users/(?P<pk>[\d]+)$", views.UserDetail.as_view(), name = "user-detail"),
   url(r"^api/meeting/$", views.MeetingList.as_view(), name = "meeting-list"),
   url(r"^api/meeting/(?P<mhash>[a-f0-9]+)$", views.MeetingDetail.as_view(), name = "meeting-detail"),
-  #url(r"^api/meeting/(?P<pk>[0-9]+)$", views.MeetingDetail.as_view(), name = "meeting-detail"),
 )
